@@ -1,0 +1,24 @@
+{
+	"Questions": [
+		 ["Nivel díficil" , "Duas forças perpendiculares entre si, de intensidades F1=10N e F2=5√2N, estão aplicadas a um corpo de massa igual a 5 kg. Qual aceleração adquirida por esse corpo?", "2√5,√2,√6,4√3,5√4","√6"],
+		 
+		 ["Nivel díficil" , "Duas forças perpendiculares entre si, de intensidades F1=10N e F2=xN, estão aplicadas a um corpo de 4 kg há uma aceleração de 10m/s². Sabendo que FR=F1+F2, ou seja, a soma vetorial das forças. Determine x:", "10√3,5√2,2√10,10√15,15√2", "10√15"],
+		 
+		 ["Nível díficil", "Na figura estão representadas duas forças concorrentes de, F1 e F2, ambas de intensidade 360N, que formam entre si um ângulo de 120° e estão aplicadas a um corpo de massa 30kg. Determine a aceleração adquirida por esse corpo.", "12m/s²,5m/s²,7m/s²,9m/s²,15m/s²", "12m/s²"],
+		 
+		 ["Nível díficil","Duas forças estão sendo aplicadas em um corpo de massa 7kg, F1=6N e F2=10N. Sabendo que o corpo acelerou a 2m/s² por conta da força aplicada, e que a direção das forças está em formato quaisquer. Determine o ângulo de aplicação da força:", "45°,60°,90°,120°,135°", "60°"],
+		 
+		 ["Nível díficil", "Dois corpos, de massas m1 e m2, estão separados no vácuo por uma distância d e exercem mutuamente uma força de atração gravitacional F. duplicando a distância entre esses corpos, a nova força de atração gravitacional entre esses corpos, em termos de F, deverá ser igual a:", "2F,F/2,F/4,4F,8F"],
+		 
+		 ["Nível díficil", "Duas forças perpendiculares, de 6 N e 8N, são aplicadas a um corpo de massa igual a 10 kg. Determine o módulo da aceleração sofrida por esse corpo considerando que não haja quaisquer outras forças atuando sobre ele.", "7m/s²,1m/s²,5m/s²,2m/s²,3m/s²","1m/s2"],
+		 
+		 ["Nível díficil", "Uma partícula parte do repouso e em 2 segundos percorre 100 metros. Considerando o movimento retilíneo e uniformemente variado, podemos afirmar que a aceleração da partícula é de:", "8m/s²,50m/s²,35m/s²,45m/s²,Nenhuma das anteriores", "50m/s²"],
+		 
+		 ["Nível díficil", "Um carro parte do repouso com aceleração de 10 m/s² e percorre uma distância de 2,0 km. Qual é o valor da velocidade média do carro, em m/s, nesse trecho?", "2.5,20,50,100,200", "100"],
+		 
+		 ["Nível díficil", "Aplicando uma força de FR=9-b² em o corpo de massa m=a-b obtém-se uma aceleração de a=√a2+b2+2ab , determine 4a:", "12,3,4,8,9", "12"],
+		 
+		 ["Nível díficil", "Qual a força foi exercida para se mover um corpo de massa m=√196+81 1/4 kg sabendo que a aceleração realizada foi de a=2^4+2^4+2^4+2^4.","1000N,1245N,1549N,1088N,1230N", "1088N"]
+		
+]
+}

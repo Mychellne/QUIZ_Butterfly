@@ -1,0 +1,23 @@
+{"Questions":
+	[
+[ "Nível médio", "Uma partícula parte do repouso e em 10 segundos percorre 100 metros. Considerando o movimento retilíneo e uniformemente variado, podemos afirmar que a aceleração da partícula é de:", "8m/s²,4m/s²,20m/s²4,5m/s²,Nenhuma das anteriores", "Nenhuma das anteriores"],
+
+["Nível médio", "Qual é a aceleração de um automóvel, no SI, que parte do repouso e atinge a velocidade de 72 km/h em 10s?", "5m/s²,1m/s²,2m/s²,4m/s²,3m/s²", "2m/s²"],
+
+["Nível médio", "Uma partícula em repouso, é acelerada uniformemente e, após percorrer 6 m, alcança a velocidade de 6 m/s. Nessas condições, sua aceleração, em metros por segundo ao quadrado, é:", "1m/s²,2m/s²,3m/s²,4m/s²,5m/s²","3m/s²" ],
+
+["Nível médio", "Um trem de 400 m de comprimento, com velocidade escalar constante de 108 km/h, gasta 30s para atravessar completamente uma ponte.A extensão da ponte, em metros, é de:", "200m,400m,500m,600m,800m", "500m"],
+
+["Nível médio","No movimento retilíneo uniformemente variado, com velocidade inicial nula, a distância percorrida é:","diretamente proporcional ao tempo de percurso,inversamente proporcional ao tempo de percurso,diretamente proporcional ao quadrado do tempo de percurso,inversamente proporcional ao quadrado do tempo de percurso,diretamente proporcional à velocidade,","diretamente proporcional ao quadrado do tempo de percurso"],
+
+["Nível médio", "Na função posição S=5+3t+8t² a posição inicial e a aceleração são respectivamente:", "5m e 3m/s²,3m e 8m/s²,5m e 16m/s²,8m e 5m/s²,16 e 5m/s²","5m e 16m/s²"],
+
+["Nível médio", "No instante t0=0 um ponto material em MRUV está a 10 m da origem, com velocidade v0= 5m/s e aceleração a=4m/s². Determine o instante em que a posição será 62 m.", "4s,5s,6s,9s,5s", "4s"],
+
+["Nível médio", "Um veículo segue em uma estrada horizontal e retilínea e o seu velocímetro registra um valor constante. Assinale a alternativa correta. I- A aceleração do veículo é nula. II- A resultante das forças que atuam sobre o veículo é nula. III -A força resultante que atua sobre o veículo tem o mesmo sentido do vetor velocidade.A opção correta", "I e III,I. II e III,Apenas II,Apenas I,I e II", "I e II"],
+
+["Nível médio", "O peso de um objeto na lua é de 80N. Determine o peso desse objeto na Terra. Dados aproximados: Gravidade da Terra = 10 m/s²; Gravidade da lua = 1,6 m/s².", "350N,300N,680N,500N,430N", "500N"],
+
+["Nível médio", "Qual alternativa corresponde a Terceira lei de Newton corretamente.","A força normal é a reação da força peso mais a força de atrito,Ação e reação são pares de forças diferentes com sentidos iguais e direções opostas,A força de ação é sempre maior que a reação,Toda ação corresponde a uma reação de mesma intensidade e sentido,Toda ação corresponde a uma reação de mesma intensidade. Mas sentido oposto", "Toda ação corresponde a uma reação de mesma intensidade. Mas sentido oposto"]
+
+]}

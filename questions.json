@@ -1,0 +1,24 @@
+{
+	"Questions": [
+		 ["Nível fácil" , "Uma pessoa pensa na possibilidade de dar a volta ao mundo a pé. Conversando com os amigos, imagina a possibilidade de existir um caminho em linha reta, desprezando a existência da água. Nestas condições, determine a quantidade de dias que ela andaria, sem parar, sabendo que a circunferência da terra mede aproximadamente 40.075 km e que uma pessoa andando com conforto possui a velocidade média de 1m/s.", "464 dias,350 dias,111.31 dias,300 dias,280 dias", "464 dias"],
+		 
+	["Nível fácil" , "Um ciclista possui velocidade de 5 m/s, ao passar por uma placa de uma estrada que indica um restaurante a 30 m adiante. Considerando a posição a partir placa, e que a velocidade do ciclista está em MRU, quantos segundos irá demorar para ele passar pelo restaurante?", "4s,2s,6s,9s,10s", "6s"],
+	
+	["Nível fácil", "Dada a função posição S=5+4∙t, dada no S.I, determine a posição em t=1,5 minutos:", "400m,365m,280m,455m,295m", "365m"],
+	
+	["Nível fácil", "Determine a função posição em MRU, de um móvel que saí da origem, e possui velocidade igual a 2713 m/s:", "S=3∙t,S=4∙t,S=5∙t,S=2∙t,S=6∙t", "S=3∙t"],
+	
+	["Nível fácil", "Seja A e B dois veículos em MRU, com as seguintes funções posições SA=2+4t e SB=4+2t. Sabendo que elas estão no SI, determine o momento em que A e B assumem a mesma posição:","3s,2s,4s,2s,1s", "1s"],
+	
+	["Nível fácil", "Determine a função posição de um motociclista que está localizado na posição 20 m e faz uma trajetória retilínea uniforme até a posição 80 m em 2s:", "S=20+80∙t,S=20+22∙t,S=20+30∙t,S=2+80∙t,S=2+20∙t", "S=20+30∙t"],
+	
+	["Nível fácil", "Um homem volta de uma viagem de negócios. Ao desembarcar do avião se depara com sua esposa e filha que estão cerca de 50 metros de distância dele. Quando sua filha o vê, dispara em sua direção, enquanto ele se desloca em direção a sua filha. Sabendo que ele está a uma velocidade de 0,5 m/s enquanto sua filha corre em sua direção com velocidade de 9 km/h, determine o instante em que aconteceu o abraço desse encontro emocionante.", "10s,45s,25s,50s,40s","25s"],
+	
+	["Nível fácil", "Um automóvel percorre uma estrada com função horária S = - 160+ 80t, sendo que S é dado em km e t está em horas. O automóvel passa pelo km zero após:", "1.0h,1.5h,0.5h,2.0h,2.5h", "2.0h"],
+	
+	["Nível fácil","Em um dia normal, um veículo gasta 4 minutos para atravessar uma ponte, movendo-se a uma velocidade de 20 m/s. Com base nos dados apresentados, calcule a extensão dessa ponte, em km.", "11.5km,10km,6km,4.8km,12,6km", "4.8km"],
+	
+	["Nível fácil", "Um navio de pesquisa equipado com SONAR está mapeando o fundo do oceano. Em determinado local, a onda ultrassônica é emitida e os detectores recebem o eco 0,4s depois. Sabendo que o som se propaga na água do mar com velocidade aproximada de 1500 m/s, assinale qual é a profundidade, em metros, do local considerado.", "450m,380m,620m,300m, 682m","300m"]
+	]
+	
+}
