@@ -3919,6 +3919,44 @@ y,size,opacity);else if(forceQuads||scaledSize>renderer.GetMaxPointSize()||scale
 }
 
 {
+'use strict';{const C3=self.C3;C3.Plugins.Shape3D=class Shape3DPlugin extends C3.SDKPluginBase{constructor(opts){super(opts)}Release(){super.Release()}}}
+{const C3=self.C3;C3.Plugins.Shape3D.Type=class Shape3DType extends C3.SDKTypeBase{constructor(objectClass){super(objectClass);this._animations=objectClass.GetAnimations()}Release(){C3.clearArray(this._animations);super.Release()}OnCreate(){for(const a of this._animations)a.LoadAllAssets(this._runtime)}LoadTextures(renderer){const opts={sampling:this._runtime.GetSampling()};return Promise.all(this._animations.map(a=>a.LoadAllTextures(renderer,opts)))}ReleaseTextures(){for(const a of this._animations)a.ReleaseAllTextures()}}}
+{const C3=self.C3;const C3X=self.C3X;const SHAPE=0;const ZHEIGHT=1;const INITIALLY_VISIBLE=2;const FACE_BACK=3;const FACE_FRONT=4;const FACE_LEFT=5;const FACE_RIGHT=6;const FACE_TOP=7;const FACE_BOTTOM=8;const Z_TILING_FACTOR=9;const OBJECT_FACE_BACK=10;const OBJECT_FACE_FRONT=11;const OBJECT_FACE_LEFT=12;const OBJECT_FACE_RIGHT=13;const OBJECT_FACE_TOP=14;const OBJECT_FACE_BOTTOM=15;const facesToDrawArr=[];let facesToDrawCount=0;for(let i=0;i<6;i++)facesToDrawArr.push({i:0,tlx:NaN,tly:NaN,tlz:NaN,
+trx:NaN,try_:NaN,trz:NaN,brx:NaN,bry:NaN,brz:NaN,blx:NaN,bly:NaN,blz:NaN,shape:0,minCamDist:NaN,midCamDist:NaN,enable:false});function SortFacesToDrawByDist(a,b){if(a.minCamDist===b.minCamDist)return b.midCamDist-a.midCamDist;else return b.minCamDist-a.minCamDist}const tempQuad=C3.New(C3.Quad);const tempVec2=C3.New(C3.Vector2);function sqDistanceTo3D(x1,y1,z1,x2,y2,z2){const dx=x2-x1;const dy=y2-y1;const dz=z2-z1;return dx*dx+dy*dy+dz*dz}function distanceTo3D(x1,y1,z1,x2,y2,z2,zScale){return Math.hypot(x2-
+x1,y2-y1,(z2-z1)*zScale)}function lerp3d(x1,y1,z1,x2,y2,z2,f){return[C3.lerp(x1,x2,f),C3.lerp(y1,y2,f),C3.lerp(z1,z2,f)]}function lerp3d2(x,y,z,ax,ay,az,bx,by,bz,af,bf){const [tx,ty,tz]=lerp3d(x,y,z,ax,ay,az,af);return lerp3d(tx,ty,tz,tx+(bx-x),ty+(by-y),tz+(bz-z),bf)}C3.Plugins.Shape3D.Instance=class Shape3DInstance extends C3.SDKWorldInstanceBase{constructor(inst,properties){super(inst);this._shape=0;this._zHeight=15;let initiallyVisible=true;this._showBackFace=false;this._showFrontFace=true;this._showLeftFace=
+true;this._showRightFace=true;this._showTopFace=true;this._showBottomFace=true;this._animation=this._objectClass.GetAnimations()[0];this._faceVisibility=[false,true,true,true,true,true];this._faceImages=[0,1,2,3,4,5];this._zTilingFactor=8;this._faceObjects=[null,null,null,null,null,null];if(properties){this._shape=properties[SHAPE];this._zHeight=properties[ZHEIGHT];initiallyVisible=!!properties[INITIALLY_VISIBLE];this._faceVisibility[0]=!!properties[FACE_BACK];this._faceVisibility[1]=!!properties[FACE_FRONT];
+this._faceVisibility[2]=!!properties[FACE_LEFT];this._faceVisibility[3]=!!properties[FACE_RIGHT];this._faceVisibility[4]=!!properties[FACE_TOP];this._faceVisibility[5]=!!properties[FACE_BOTTOM];this._zTilingFactor=properties[Z_TILING_FACTOR];this._SetFaceObjectClass(0,this._runtime.GetObjectClassBySID(properties[OBJECT_FACE_BACK]));this._SetFaceObjectClass(1,this._runtime.GetObjectClassBySID(properties[OBJECT_FACE_FRONT]));this._SetFaceObjectClass(2,this._runtime.GetObjectClassBySID(properties[OBJECT_FACE_LEFT]));
+this._SetFaceObjectClass(3,this._runtime.GetObjectClassBySID(properties[OBJECT_FACE_RIGHT]));this._SetFaceObjectClass(4,this._runtime.GetObjectClassBySID(properties[OBJECT_FACE_TOP]));this._SetFaceObjectClass(5,this._runtime.GetObjectClassBySID(properties[OBJECT_FACE_BOTTOM]))}const wi=this.GetWorldInfo();wi.SetDepth(this._zHeight);this._bquadRef=wi.GetBoundingQuad();wi.SetVisible(initiallyVisible);const baseFrame=this.GetBaseAnimationFrame();wi.SetOriginX(baseFrame.GetOriginX());wi.SetOriginY(baseFrame.GetOriginY());
+wi.SetBboxChanged()}Release(){super.Release()}GetBaseAnimationFrame(){return this._animation.GetFrameAt(0)}GetCurrentImageInfo(){return this.GetBaseAnimationFrame().GetImageInfo()}IsOriginalSizeKnown(){return true}_AddFaceToDraw(i,tlx,tly,tlz,trx,try_,trz,brx,bry,brz,blx,bly,blz,shape){const o=facesToDrawArr[i];o.i=i;o.tlx=tlx;o.tly=tly;o.tlz=tlz;o.trx=trx;o.try_=try_;o.trz=trz;o.brx=brx;o.bry=bry;o.brz=brz;o.blx=blx;o.bly=bly;o.blz=blz;o.shape=shape;o.enable=true;facesToDrawCount++}Draw(renderer){const wi=
+this.GetWorldInfo();const faceVisibility=this._faceVisibility;let showBackFace=faceVisibility[0];let showFrontFace=faceVisibility[1];let showLeftFace=faceVisibility[2];let showRightFace=faceVisibility[3];let showTopFace=faceVisibility[4];let showBottomFace=faceVisibility[5];if(wi.IsDrawBackFaceOnly()){showFrontFace=false;showLeftFace=false;showRightFace=false;showTopFace=false;showBottomFace=false}else if(wi.IsDrawNonBackFacesOnly())showBackFace=false;if(!showBackFace&&!showFrontFace&&!showLeftFace&&
+!showRightFace&&!showTopFace&&!showBottomFace)return;let q=this._bquadRef;if(this._runtime.IsPixelRoundingEnabled())q=wi.PixelRoundQuad(q);const tlx=q.getTlx();const tly=q.getTly();const trx=q.getTrx();const try_=q.getTry();const brx=q.getBrx();const bry=q.getBry();const blx=q.getBlx();const bly=q.getBly();const shape=this._shape;const h=this._zHeight;facesToDrawCount=0;for(let i=0;i<6;i++)facesToDrawArr[i].enable=false;if(showBackFace)this._AddFaceToDraw(0,tlx,tly,0,trx,try_,0,brx,bry,0,blx,bly,
+0,0);if(shape===0){if(showLeftFace)this._AddFaceToDraw(2,tlx,tly,h,blx,bly,h,blx,bly,0,tlx,tly,0,0);if(showRightFace)this._AddFaceToDraw(3,brx,bry,h,trx,try_,h,trx,try_,0,brx,bry,0,0);if(showTopFace)this._AddFaceToDraw(4,trx,try_,h,tlx,tly,h,tlx,tly,0,trx,try_,0,0);if(showBottomFace)this._AddFaceToDraw(5,blx,bly,h,brx,bry,h,brx,bry,0,blx,bly,0,0);if(showFrontFace)this._AddFaceToDraw(1,tlx,tly,h,trx,try_,h,brx,bry,h,blx,bly,h,0)}else if(shape===1){const rlx=(tlx+blx)/2;const rly=(tly+bly)/2;const rrx=
+(trx+brx)/2;const rry=(try_+bry)/2;if(showLeftFace)this._AddFaceToDraw(2,rlx,rly,h,rlx,rly,h,blx,bly,0,tlx,tly,0,4);if(showRightFace)this._AddFaceToDraw(3,rrx,rry,h,rrx,rry,h,trx,try_,0,brx,bry,0,4);if(showTopFace)this._AddFaceToDraw(4,rrx,rry,h,rlx,rly,h,tlx,tly,0,trx,try_,0,0);if(showBottomFace)this._AddFaceToDraw(5,rlx,rly,h,rrx,rry,h,brx,bry,0,blx,bly,0,0)}else if(shape===2){if(showLeftFace)this._AddFaceToDraw(2,trx,try_,h,brx,bry,h,blx,bly,0,tlx,tly,0,0);if(showRightFace)this._AddFaceToDraw(3,
+brx,bry,h,trx,try_,h,trx,try_,0,brx,bry,0,0);if(showTopFace)this._AddFaceToDraw(4,trx,try_,h,trx,try_,h,tlx,tly,0,trx,try_,0,2);if(showBottomFace)this._AddFaceToDraw(5,brx,bry,h,brx,bry,h,brx,bry,0,blx,bly,0,3)}else if(shape===3){const midX=q.midX();const midY=q.midY();if(showLeftFace)this._AddFaceToDraw(2,midX,midY,h,midX,midY,h,blx,bly,0,tlx,tly,0,4);if(showRightFace)this._AddFaceToDraw(3,midX,midY,h,midX,midY,h,trx,try_,0,brx,bry,0,4);if(showTopFace)this._AddFaceToDraw(4,midX,midY,h,midX,midY,
+h,tlx,tly,0,trx,try_,0,4);if(showBottomFace)this._AddFaceToDraw(5,midX,midY,h,midX,midY,h,brx,bry,0,blx,bly,0,4)}else if(shape===4){if(showLeftFace)this._AddFaceToDraw(2,trx,try_,h,trx,try_,h,blx,bly,0,tlx,tly,0,2);if(showRightFace)this._AddFaceToDraw(3,trx,try_,h,trx,try_,h,trx,try_,0,brx,bry,0,3);if(showTopFace)this._AddFaceToDraw(4,trx,try_,h,trx,try_,h,tlx,tly,0,trx,try_,0,2);if(showBottomFace)this._AddFaceToDraw(5,trx,try_,h,trx,try_,h,brx,bry,0,blx,bly,0,3)}else if(shape===5){if(showLeftFace)this._AddFaceToDraw(2,
+tlx,tly,h,tlx,tly,h,blx,bly,0,tlx,tly,0,2);if(showRightFace)this._AddFaceToDraw(3,brx,bry,h,trx,try_,h,trx,try_,0,brx,bry,0,0);if(showTopFace)this._AddFaceToDraw(4,trx,try_,h,tlx,tly,h,tlx,tly,0,trx,try_,0,0);if(showBottomFace)this._AddFaceToDraw(5,brx,bry,h,brx,bry,h,brx,bry,0,blx,bly,0,3);if(showFrontFace)this._AddFaceToDraw(1,tlx,tly,h,trx,try_,h,brx,bry,h,blx,bly,0,1)}if(facesToDrawCount>1){const [camX,camY,camZ]=wi.GetLayer().GetCameraPosition();for(let i=0;i<6;++i){const f=facesToDrawArr[i];
+if(!f.enable)continue;f.minCamDist=Math.min(sqDistanceTo3D(camX,camY,camZ,f.tlx,f.tly,f.tlz),sqDistanceTo3D(camX,camY,camZ,f.trx,f.try_,f.trz),sqDistanceTo3D(camX,camY,camZ,f.brx,f.bry,f.brz),sqDistanceTo3D(camX,camY,camZ,f.blx,f.bly,f.blz));f.midCamDist=sqDistanceTo3D(camX,camY,camZ,(f.tlx+f.trx+f.brx+f.blx)/4,(f.tly+f.try_+f.bry+f.bly)/4,(f.tlz+f.trz+f.brz+f.blz)/4)}facesToDrawArr.sort(SortFacesToDrawByDist)}for(let i=0;i<6;++i){const f=facesToDrawArr[i];if(!f.enable)continue;this._DrawFace(renderer,
+f.i,f.tlx,f.tly,f.tlz,f.trx,f.try_,f.trz,f.brx,f.bry,f.brz,f.blx,f.bly,f.blz,f.shape)}}_DrawFace(renderer,i,tlx,tly,tlz,trx,try_,trz,brx,bry,brz,blx,bly,blz,shape){let texture=null;let quadTex=null;let preCalculatedQuadTexCoords=false;const faceObjectClass=this._faceObjects[i];if(faceObjectClass!==null){const inst=faceObjectClass.GetPairedInstance(this.GetInstance());if(!inst)return;const sdkInst=inst.GetSdkInstance();if(C3.Plugins.Sprite&&sdkInst instanceof C3.Plugins.Sprite.Instance){texture=sdkInst.GetTexture();
+if(texture===null)return;quadTex=sdkInst.GetTexQuad()}else if(C3.Plugins.TiledBg&&sdkInst instanceof C3.Plugins.TiledBg.Instance||C3.Plugins.NinePatch&&sdkInst instanceof C3.Plugins.NinePatch.Instance){let areaWidth=0;let areaHeight=0;const zTilingFactor=this._zTilingFactor;switch(shape){case 0:case 1:areaWidth=distanceTo3D(tlx,tly,tlz,trx,try_,trz,zTilingFactor);areaHeight=distanceTo3D(trx,try_,trz,brx,bry,brz,zTilingFactor);break;case 2:areaWidth=distanceTo3D(blx,bly,blz,brx,bry,brz,zTilingFactor);
+areaHeight=distanceTo3D(tlx,tly,tlz,blx,bly,blz,zTilingFactor);break;case 3:areaWidth=distanceTo3D(blx,bly,blz,brx,bry,brz,zTilingFactor);areaHeight=distanceTo3D(trx,try_,trz,brx,bry,brz,zTilingFactor);break;case 4:areaWidth=distanceTo3D(blx,bly,blz,brx,bry,brz,zTilingFactor);areaHeight=distanceTo3D(tlx,tly,tlz,(blx+brx)/2,(bly+bry)/2,(blz+brz)/2,zTilingFactor);break}if(C3.Plugins.TiledBg&&sdkInst instanceof C3.Plugins.TiledBg.Instance){texture=sdkInst.GetTexture();if(texture===null)return;sdkInst.CalculateTextureCoordsFor3DFace(areaWidth,
+areaHeight,tempQuad);preCalculatedQuadTexCoords=true}else{if(shape!==0)return;sdkInst._Set3DCallback((drawRect,texRect)=>{drawRect.divide(areaWidth,areaHeight);const lf=drawRect.getLeft();const tf=drawRect.getTop();const rf=drawRect.getRight();const bf=drawRect.getBottom();const [ntlx,ntly,ntlz]=lerp3d2(tlx,tly,tlz,trx,try_,trz,blx,bly,blz,lf,tf);const [ntrx,ntry,ntrz]=lerp3d2(tlx,tly,tlz,trx,try_,trz,blx,bly,blz,rf,tf);const [nbrx,nbry,nbrz]=lerp3d2(tlx,tly,tlz,trx,try_,trz,blx,bly,blz,rf,bf);const [nblx,
+nbly,nblz]=lerp3d2(tlx,tly,tlz,trx,try_,trz,blx,bly,blz,lf,bf);renderer.Quad3D(ntlx,ntly,ntlz,ntrx,ntry,ntrz,nbrx,nbry,nbrz,nblx,nbly,nblz,texRect)});sdkInst._Draw(renderer,0,0,areaWidth,areaHeight);sdkInst._Set3DCallback(null);return}}else return}else{i=this._faceImages[i];const frame=this._animation.GetFrameAt(i);const imageInfo=frame.GetImageInfo();texture=imageInfo.GetTexture();if(texture===null)return;quadTex=imageInfo.GetTexQuad()}renderer.SetTexture(texture);if(shape>=3||preCalculatedQuadTexCoords){if(!preCalculatedQuadTexCoords)tempQuad.copy(quadTex);
+if(shape===3){tempQuad.setTlx(tempQuad.getTrx());tempQuad.setTly(tempQuad.getTly())}else if(shape===4){tempQuad.setTlx((tempQuad.getTlx()+tempQuad.getTrx())/2);tempQuad.setTly((tempQuad.getTly()+tempQuad.getTry())/2)}renderer.Quad3D2(tlx,tly,tlz,trx,try_,trz,brx,bry,brz,blx,bly,blz,tempQuad)}else renderer.Quad3D2(tlx,tly,tlz,trx,try_,trz,brx,bry,brz,blx,bly,blz,quadTex)}RendersToOwnZPlane(){return this._IsFaceVisible(0)}GetImagePointCount(){return this.GetBaseAnimationFrame().GetImagePointCount()}GetImagePoint(nameOrIndex){const frame=
+this.GetBaseAnimationFrame();const wi=this.GetWorldInfo();let ip=null;if(typeof nameOrIndex==="string")ip=frame.GetImagePointByName(nameOrIndex);else if(typeof nameOrIndex==="number")ip=frame.GetImagePointByIndex(nameOrIndex-1);else throw new TypeError("expected string or number");if(!ip)return[wi.GetX(),wi.GetY()];tempVec2.copy(ip.GetVec2());if(wi.HasMesh()){const [tx,ty]=wi.GetSourceMesh().TransformPoint(tempVec2.getX(),tempVec2.getY());tempVec2.set(tx,ty)}tempVec2.offset(-frame.GetOriginX(),-frame.GetOriginY());
+tempVec2.scale(wi.GetWidth(),wi.GetHeight());tempVec2.rotate(wi.GetAngle());tempVec2.offset(wi.GetX(),wi.GetY());return[tempVec2.getX(),tempVec2.getY()]}_SetShape(s){if(this._shape===s)return;this._shape=s;this._runtime.UpdateRender()}_GetShape(){return this._shape}_SetZHeight(h){h=Math.max(h,0);if(this._zHeight===h)return;this._zHeight=h;this.GetWorldInfo().SetDepth(h);this._runtime.UpdateRender()}_GetZHeight(){return this._zHeight}_SetFaceVisible(face,v){v=!!v;if(this._faceVisibility[face]===v)return;
+this._faceVisibility[face]=v;this._runtime.UpdateRender()}_IsFaceVisible(face){return this._faceVisibility[face]}_SetFaceImage(face,image){const faceImages=this._faceImages;const faceObjects=this._faceObjects;if(faceImages[face]===image&&faceObjects[face]===null)return;faceImages[face]=image;faceObjects[face]=null;this._runtime.UpdateRender()}_SetFaceObjectClass(face,objectClass){if(objectClass!==null&&objectClass.IsFamily())objectClass=objectClass.GetFamilyMembers()[0];const faceObjects=this._faceObjects;
+if(faceObjects[face]===objectClass)return;faceObjects[face]=objectClass;this._runtime.UpdateRender()}_SetZTilingFactor(zf){if(this._zTilingFactor===zf)return;this._zTilingFactor=zf;this._runtime.UpdateRender()}_GetZTilingFactor(){return this._zTilingFactor}SaveToJson(){const o={"s":this._shape,"zh":this._zHeight,"fv":this._faceVisibility,"fi":this._faceImages,"fo":this._faceObjects.map(t=>t?t.GetSID():-1),"zf":this._zTilingFactor};return o}LoadFromJson(o){this._shape=o["s"];this._zHeight=o["zh"];
+this.GetWorldInfo().SetDepth(this._zHeight);this._faceVisibility=o["fv"].slice(0);this._faceImages=o["fi"].slice(0);if(o.hasOwnProperty("fo"))this._faceObjects=o["fo"].map(sid=>this._runtime.GetObjectClassBySID(sid));if(o.hasOwnProperty("zf"))this._zTilingFactor=o["zf"]}GetPropertyValueByIndex(index){}SetPropertyValueByIndex(index,value){}GetDebuggerProperties(){const prefix="plugins.shape3d";return[{title:prefix+".name",properties:[{name:prefix+".properties.z-height.name",value:this._GetZHeight(),
+onedit:v=>this._SetZHeight(v)}]}]}GetScriptInterfaceClass(){return self.I3DShapeInstance}};const map=new WeakMap;const VALID_SHAPES=["box","prism","wedge","pyramid","corner-out","corner-in"];const VALID_FACES=["back","front","left","right","top","bottom"];self.I3DShapeInstance=class I3DShapeInstance extends self.IWorldInstance{constructor(){super();map.set(this,self.IInstance._GetInitInst().GetSdkInstance())}getImagePointCount(){return map.get(this).GetImagePointCount()}getImagePointX(nameOrIndex){if(typeof nameOrIndex!==
+"string"&&typeof nameOrIndex!=="number")throw new TypeError("expected string or number");return map.get(this).GetImagePoint(nameOrIndex)[0]}getImagePointY(nameOrIndex){if(typeof nameOrIndex!=="string"&&typeof nameOrIndex!=="number")throw new TypeError("expected string or number");return map.get(this).GetImagePoint(nameOrIndex)[1]}getImagePoint(nameOrIndex){if(typeof nameOrIndex!=="string"&&typeof nameOrIndex!=="number")throw new TypeError("expected string or number");return map.get(this).GetImagePoint(nameOrIndex)}set zHeight(h){C3X.RequireFiniteNumber(h);
+map.get(this)._SetZHeight(h)}get zHeight(){return map.get(this)._GetZHeight()}set shape(str){C3X.RequireString(str);const s=VALID_SHAPES.indexOf(str);if(s===-1)throw new TypeError("invalid shape");map.get(this)._SetShape(s)}get shape(){return VALID_SHAPES[map.get(this)._Getshape()]}setFaceVisible(faceStr,v){const face=VALID_FACES.indexOf(faceStr);if(face<0)throw new Error("invalid face");map.get(this)._SetFaceVisible(face,!!v)}isFaceVisible(faceStr){const face=VALID_FACES.indexOf(faceStr);if(face<
+0)throw new Error("invalid face");return map.get(this)._IsFaceVisible(face)}setFaceImage(faceStr,imageStr){const face=VALID_FACES.indexOf(faceStr);const image=VALID_FACES.indexOf(imageStr);if(face<0||image<0)throw new Error("invalid face");map.get(this)._SetFaceImage(face,image)}get zTilingFactor(){return map.get(this)._GetZTilingFactor()}set zTilingFactor(zf){C3X.RequireFiniteNumber(zf);map.get(this)._SetZTilingFactor(zf)}setFaceObject(faceStr,iObjectClass){const face=VALID_FACES.indexOf(faceStr);
+if(face<0)throw new Error("invalid face");const inst=map.get(this);const objectClass=inst.GetRuntime()._UnwrapIObjectClass(iObjectClass);inst._SetFaceObjectClass(face,objectClass)}}}{const C3=self.C3;C3.Plugins.Shape3D.Cnds={CompareShape(s){return this._GetShape()===s},CompareZHeight(cmp,zh){return C3.compare(this._GetZHeight(),cmp,zh)},IsFaceVisible(face){return this._IsFaceVisible(face)}}}
+{const C3=self.C3;C3.Plugins.Shape3D.Acts={SetShape(s){this._SetShape(s)},SetZHeight(zh){this._SetZHeight(zh)},SetFaceVisible(face,v){this._SetFaceVisible(face,v)},SetFaceImage(face,image){this._SetFaceImage(face,image)},SetZTilingFactor(zf){this._SetZTilingFactor(zf)},SetFaceObject(face,objectClass){this._SetFaceObjectClass(face,objectClass)}}}{const C3=self.C3;C3.Plugins.Shape3D.Exps={ZHeight(){return this._GetZHeight()},ZTilingFactor(){return this._GetZTilingFactor()}}};
+
+}
+
+{
 'use strict';{const C3=self.C3;C3.Behaviors.Tween=class TweenBehavior extends C3.SDKBehaviorBase{constructor(opts){super(opts)}Release(){super.Release()}}}{const C3=self.C3;C3.Behaviors.Tween.Type=class TweenType extends C3.SDKBehaviorTypeBase{constructor(behaviorType){super(behaviorType)}Release(){super.Release()}OnCreate(){}}}
 {const C3=self.C3;const NAMESPACE=C3.Behaviors.Tween;const ENABLED=0;NAMESPACE.Instance=class TweenInstance extends C3.SDKBehaviorInstanceBase{constructor(behInst,properties){super(behInst);this._allowMultiple=false;this._enabled=true;if(properties){this._allowMultiple=false;this._enabled=!!properties[ENABLED]}this._activeTweens=new Map;this._disabledTweens=[];this._waitingForReleaseTweens=new Map;this._finishingTween=null;this._activeTweensJson=null;this._disabledTweensJson=null;this._waitingForReleaseTweensJson=
 null;this._finishingTweenName="";if(this._enabled)this._StartTicking2();this._afterLoad=e=>this._OnAfterLoad(e);this.GetRuntime().Dispatcher().addEventListener("afterload",this._afterLoad)}Release(){this.GetRuntime().Dispatcher().removeEventListener("afterload",this._afterLoad);this._afterLoad=null;if(this._finishingTween){this.ReleaseAndCompleteTween(this._finishingTween);this._finishingTween=null}this.ReleaseAndCompleteTweens();this._tweens=null;this.ClearDisabledList();this._disabledTweens=null;
@@ -4137,8 +4175,11 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.Fade,
 		C3.Behaviors.EightDir,
 		C3.Plugins.Particles,
+		C3.Plugins.Shape3D,
 		C3.Plugins.System.Cnds.OnLayoutStart,
 		C3.Plugins.System.Acts.SetVar,
+		C3.Plugins.Sprite.Acts.Destroy,
+		C3.Plugins.Audio.Acts.StopAll,
 		C3.Plugins.AJAX.Cnds.OnComplete,
 		C3.Plugins.Json.Acts.Parse,
 		C3.Plugins.AJAX.Exps.LastData,
@@ -4150,9 +4191,9 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Touch.Cnds.IsTouchingObject,
 		C3.Plugins.Touch.Cnds.OnDoubleTapGestureObject,
 		C3.Behaviors.Fade.Acts.StartFade,
+		C3.Plugins.Audio.Acts.Play,
 		C3.Plugins.System.Acts.Wait,
 		C3.Plugins.AJAX.Acts.RequestFile,
-		C3.Plugins.Audio.Acts.Play,
 		C3.Plugins.Json.Exps.Get,
 		C3.Plugins.NinePatch.Acts.SetDefaultColor,
 		C3.Plugins.System.Exps.rgbex255,
@@ -4173,19 +4214,16 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Cnds.Else,
 		C3.Plugins.System.Cnds.LayerVisible,
 		C3.Plugins.System.Acts.ResetGlobals,
-		C3.Plugins.Audio.Acts.StopAll,
 		C3.Behaviors.Flash.Acts.Flash,
 		C3.Plugins.Sprite.Acts.SetOpacity,
 		C3.Plugins.Sprite.Acts.SetVisible,
-		C3.Plugins.Sprite.Acts.SetSize,
+		C3.Plugins.Sprite.Acts.MoveToTop,
 		C3.Plugins.Touch.Cnds.OnTouchObject,
-		C3.Plugins.Sprite.Acts.Destroy,
 		C3.Plugins.Text.Acts.Destroy,
 		C3.Behaviors.Pin.Acts.PinByProperties,
 		C3.Behaviors.Tween.Acts.TweenOneProperty,
 		C3.Plugins.Text.Acts.SetVisible,
-		C3.Plugins.Touch.Cnds.OnTapGestureObject,
-		C3.Behaviors.EightDir.Acts.SetAcceleration
+		C3.Plugins.Touch.Cnds.OnTapGestureObject
 	];
 };
 self.C3_JsPropNameTable = [
@@ -4244,7 +4282,7 @@ self.C3_JsPropNameTable = [
 	{Sprite7: 0},
 	{Sprite3: 0},
 	{card9: 0},
-	{Sprite4: 0},
+	{Quadro_Explicação: 0},
 	{inter: 0},
 	{bt_FadaMadrinha: 0},
 	{Sprite5: 0},
@@ -4262,6 +4300,15 @@ self.C3_JsPropNameTable = [
 	{Partículas_Borboleta: 0},
 	{Sprite13: 0},
 	{Sprite14: 0},
+	{Sprite4: 0},
+	{Botão_OK: 0},
+	{Forma3D: 0},
+	{botão_avançar: 0},
+	{OK: 0},
+	{Sprite15: 0},
+	{Feedback_vitoria: 0},
+	{Feedback_derrota: 0},
+	{Sprite16: 0},
 	{QCount: 0},
 	{nivel_selecionado: 0},
 	{QNum: 0},
@@ -4390,13 +4437,13 @@ self.C3_ExpressionFuncs = [
 		() => 3,
 		() => 4,
 		() => 5,
+		() => 0,
 		() => 557,
 		() => 792,
 		() => 0.5,
 		() => 1070,
 		() => 1359,
 		() => -25,
-		() => 0,
 		() => "music",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
@@ -4432,6 +4479,7 @@ self.C3_ExpressionFuncs = [
 			const v1 = p._GetNode(1).GetVar();
 			return () => (100 * (v0.GetValue() / v1.GetValue()));
 		},
+		() => 50,
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
@@ -4466,22 +4514,20 @@ self.C3_ExpressionFuncs = [
 			return () => f0(255, 51, 51);
 		},
 		() => 0.1,
-		() => 1.25,
 		() => 90,
 		() => 0.2,
 		() => 80,
 		() => 70,
 		() => 60,
-		() => 50,
 		() => 40,
 		() => 30,
 		() => 20,
 		() => 10,
-		() => 400,
+		() => 560,
+		() => 923,
+		() => -5,
 		() => "refanimation",
-		() => 950.5,
-		() => 150,
-		() => 130
+		() => 800
 ];
 
 
